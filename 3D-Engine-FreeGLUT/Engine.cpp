@@ -55,6 +55,19 @@ void Engine::update(void) {
 		0.0f, 1.0f, 0.0f);*/
 }
 
+float lineVert[12] = {
+	-2, 0, 0,
+	0, 2, 0,
+	2, 0, 0,
+	0, 2, 0
+};
+
+float lineCols[12] = {
+	1, 0, 0,
+	0, 1, 0,
+	1, 0, 0,
+	0, 0, 1
+};
 
 void Engine::display(void) {
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
@@ -62,15 +75,29 @@ void Engine::display(void) {
 	prevTime = currentTime;
 
 	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3f(1.0f, 0.0f, 0.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glTranslatef(0, 0, -8);
 
-	EasyFreeGLUTShapesDrawer shapesDrawer;
+	Line line(lineVert,lineCols, 2);
+	line.drawLine();
+
+	/*glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, lineVert);
+
+	glEnableClientState(GL_COLOR_ARRAY);
+	glColorPointer(3, GL_FLOAT, 0, lineCols);
+
+	glDrawArrays(GL_LINES, 0, 2);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);*/
+
+	//EasyFreeGLUTShapesDrawer shapesDrawer;
 	//glColor3f(1, 0, 0);
-	glColor3f(0, 1, 0);
-	shapesDrawer.drawWireTeapot(4);
+	//glColor3f(0, 1, 0);
+	//shapesDrawer.drawWireTeapot(4);
 	//shapesDrawer.drawSolidSphere(2, 10, 10);
 
 	/*glBegin(GL_TRIANGLES);

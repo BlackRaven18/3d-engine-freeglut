@@ -132,11 +132,13 @@
   <ItemGroup>
     <ClCompile Include="EasyFreeGLUTShapesDrawer.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EasyFreeGLUTShapesDrawer.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Line.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
