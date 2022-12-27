@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="EasyFreeGLUTShapesDrawer.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Line.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="TriangleStrip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="EasyFreeGLUTShapesDrawer.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Line.h" />
