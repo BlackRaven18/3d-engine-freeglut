@@ -140,6 +140,20 @@ float triangleFanColors[12] = {
 	1, 1, 0,
 };
 
+float quadVerts[12] = {
+	-1, 0, 0,
+	-1, 1, 0,
+	1, 1, 0,
+	1, 0, 0
+};
+
+float QuadColors[12] = {
+	1, 1, 0,
+	1, 1, 0,
+	1, 1, 0,
+	1, 1, 0,
+};
+
 
 
 void Engine::display(void) {
@@ -170,7 +184,10 @@ void Engine::display(void) {
 	//ts.draw();
 
 	TriangleFan tf(triangleFanVerts, triangleFanColors, 4);
-	tf.draw();
+	//tf.draw();
+
+	Quad q(quadVerts, QuadColors, 1);
+	q.draw();
 
 	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, lineVert);

@@ -133,6 +133,7 @@
     <ClCompile Include="EasyFreeGLUTShapesDrawer.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Quad.cpp" />
     <ClCompile Include="Segment.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="EasyFreeGLUTShapesDrawer.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="Quad.h" />
     <ClInclude Include="Segment.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Triangle.h" />

@@ -23,7 +23,7 @@ void TriangleFan::draw() {
 	glEnableClientState(GL_COLOR_ARRAY);
 	glColorPointer(3, GL_FLOAT, 0, trianglesColors);
 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, howManyPoints);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, howManyPoints);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 }
