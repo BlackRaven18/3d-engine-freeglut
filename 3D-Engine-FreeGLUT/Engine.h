@@ -6,6 +6,7 @@
 #include "EasyFreeGLUTShapesDrawer.h"
 
 #include "Point.h"
+#include "Segment.h"
 #include "Line.h"
 
 

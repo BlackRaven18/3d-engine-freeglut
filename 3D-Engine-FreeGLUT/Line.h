@@ -1,15 +1,18 @@
 #pragma once
 #include <GL/freeglut.h>
 
+enum LineType{NORMAL, CLOSED};
+
 class Line {
 private:
 	float* lineVert;
 	float* lineColors;
 	int howManyLines;
+	int type;
 
 public:
 	Line();
-	Line(float* lineVert, float* lineColors, int howManyLines);
+	Line(int type, float* lineVert, float* lineColors, int howManyLines);
 
 	void draw();
 

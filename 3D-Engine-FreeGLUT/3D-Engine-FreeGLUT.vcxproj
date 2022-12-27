@@ -133,6 +133,7 @@
     <ClCompile Include="EasyFreeGLUTShapesDrawer.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Segment.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="EasyFreeGLUTShapesDrawer.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="Segment.h" />
     <ClInclude Include="Point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

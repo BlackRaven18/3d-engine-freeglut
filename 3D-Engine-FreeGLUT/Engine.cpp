@@ -55,14 +55,14 @@ void Engine::update(void) {
 		0.0f, 1.0f, 0.0f);*/
 }
 
-float lineVert[12] = {
+float segVert[12] = {
 	-2, 0, 0,
 	0, 2, 0,
 	2, 0, 0,
 	0, 2, 0
 };
 
-float lineCols[12] = {
+float segCols[12] = {
 	1, 0, 0,
 	0, 1, 0,
 	1, 0, 0,
@@ -79,6 +79,18 @@ float pointColors[6]{
 	0, 1, 0
 };
 
+float lineVert[9] = {
+	0, 0, 0,
+	2, 0, 0,
+	1, -1, 0
+};
+
+float lineCols[9] = {
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0
+};
+
 void Engine::display(void) {
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
 	deltaTime = currentTime - prevTime;
@@ -91,11 +103,14 @@ void Engine::display(void) {
 	glLoadIdentity();
 	glTranslatef(0, 0, -8);
 
-	Line line(lineVert,lineCols, 2);
-	line.draw();
+	Segment segment(segVert,segCols, 2);
+	//segment.draw();
 
 	Point point(pointVert, pointColors, 2);
-	point.draw();
+	//point.draw();
+
+	Line line(CLOSED, lineVert, lineCols, 3);
+	line.draw();
 
 	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, lineVert);
