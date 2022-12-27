@@ -1,8 +1,8 @@
 #include "Engine.h"
 
 Engine* Engine::instance = nullptr;
-const int Engine::WINDOW_WIDTH = 600;
-const int Engine::WINDOW_HEIGHT = 400;
+const int Engine::WINDOW_WIDTH = 1280;
+const int Engine::WINDOW_HEIGHT = 720;
 const char* Engine::APP_TITLE = "3D Game Engine!";
 
 Engine::Engine() {
@@ -55,9 +55,15 @@ void Engine::render(void) {
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0, 0, -3);
+	glTranslatef(0, 0, -8);
 
-	glBegin(GL_TRIANGLES);
+	EasyFreeGLUTShapesDrawer shapesDrawer;
+	//glColor3f(1, 0, 0);
+	glColor3f(0, 1, 0);
+	shapesDrawer.drawWireTeapot(4);
+	//shapesDrawer.drawSolidSphere(2, 10, 10);
+
+	/*glBegin(GL_TRIANGLES);
 	glColor3f(1, 0, 0);
 	glVertex3f(0, 1, 0);
 
@@ -67,7 +73,7 @@ void Engine::render(void) {
 	glColor3f(0, 0, 1);
 	glVertex3f(1, 0, 0);
 	glEnd();
-	glFlush();
+	glFlush();*/
 
 	glutSwapBuffers();
 }
