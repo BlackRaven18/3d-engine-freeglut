@@ -38,7 +38,7 @@ private:
 	Engine();
 	virtual ~Engine();
 
-	float deltaTime;
+	static float currentTime, prevTime, deltaTime;
 
 
 
@@ -50,7 +50,7 @@ public:
 	void start();
 
 	static void update();
-	static void render();
+	static void display();
 
 	static void changeSize(int w, int h);
 	static void keyboard(unsigned char key, int x, int y);

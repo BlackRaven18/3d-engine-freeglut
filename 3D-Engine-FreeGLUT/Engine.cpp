@@ -1,9 +1,15 @@
 #include "Engine.h"
 
-Engine* Engine::instance = nullptr;
 const int Engine::WINDOW_WIDTH = 1280;
 const int Engine::WINDOW_HEIGHT = 720;
 const char* Engine::APP_TITLE = "3D Game Engine!";
+
+Engine* Engine::instance = nullptr;
+float Engine::currentTime = 0;
+float Engine::prevTime = 0;
+float Engine::deltaTime = 0;
+
+
 
 Engine::Engine() {
 }
@@ -29,7 +35,7 @@ void Engine::init(int argc, char** argv) {
 	glutCreateWindow(APP_TITLE);
 
 	glutIdleFunc(update);
-	glutDisplayFunc(render);
+	glutDisplayFunc(display);
 	glutReshapeFunc(changeSize);
 	glutKeyboardFunc(keyboard);
 
@@ -50,7 +56,11 @@ void Engine::update(void) {
 }
 
 
-void Engine::render(void) {
+void Engine::display(void) {
+	currentTime = glutGet(GLUT_ELAPSED_TIME);
+	deltaTime = currentTime - prevTime;
+	prevTime = currentTime;
+
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glMatrixMode(GL_MODELVIEW);
