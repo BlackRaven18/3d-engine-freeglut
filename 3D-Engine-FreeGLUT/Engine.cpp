@@ -110,6 +110,38 @@ float triangleColors[18] = {
 	0, 1, 0
 };
 
+float triangleStripVert[15] = {
+	-1, 1, 0,
+	0, 0, 0,
+	1, 1, 0,
+	1, -1, 0,
+	2, 1, 0
+};
+
+float triangleStripColors[15] = {
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0
+};
+
+float triangleFanVerts[12] = {
+	0, 0, 0,
+	-1, 0, 0,
+	-1, 1, 0,
+	0, 1, 0
+};
+
+float triangleFanColors[12] = {
+	1, 1, 0,
+	1, 1, 0,
+	1, 1, 0,
+	1, 1, 0,
+};
+
+
+
 void Engine::display(void) {
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
 	deltaTime = currentTime - prevTime;
@@ -132,7 +164,13 @@ void Engine::display(void) {
 	//line.draw();
 
 	Triangle triangle(triangleVert, triangleColors, 2);
-	triangle.draw();
+	//triangle.draw();
+
+	TriangleStrip ts(triangleStripVert, triangleStripColors, 5);
+	//ts.draw();
+
+	TriangleFan tf(triangleFanVerts, triangleFanColors, 4);
+	tf.draw();
 
 	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, lineVert);
