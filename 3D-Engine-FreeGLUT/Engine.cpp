@@ -11,6 +11,7 @@ float Engine::deltaTime = 0;
 
 
 
+
 Engine::Engine() {
 }
 
@@ -91,6 +92,24 @@ float lineCols[9] = {
 	1, 0, 0
 };
 
+float triangleVert[18] = {
+	-2, 0, 0,
+	2, 0, 0,
+	0, 4, 0,
+	-2, 0, 0,
+	2, 0, 0,
+	0, -4, 0
+};
+
+float triangleColors[18] = {
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
+	0, 1, 0,
+	0, 1, 0,
+	0, 1, 0
+};
+
 void Engine::display(void) {
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
 	deltaTime = currentTime - prevTime;
@@ -110,7 +129,10 @@ void Engine::display(void) {
 	//point.draw();
 
 	Line line(CLOSED, lineVert, lineCols, 3);
-	line.draw();
+	//line.draw();
+
+	Triangle triangle(triangleVert, triangleColors, 2);
+	triangle.draw();
 
 	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, lineVert);
