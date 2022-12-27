@@ -5,7 +5,9 @@
 #include <iostream>
 #include "EasyFreeGLUTShapesDrawer.h"
 
+#include "Point.h"
 #include "Line.h"
+
 
 #define M_PI 3.14159265358979323846264338327950288
 

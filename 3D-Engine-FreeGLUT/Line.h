@@ -11,7 +11,7 @@ public:
 	Line();
 	Line(float* lineVert, float* lineColors, int howManyLines);
 
-	void drawLine();
+	void draw();
 
 	float* getLineVert();
 	void setLineVert(float* LineVert);

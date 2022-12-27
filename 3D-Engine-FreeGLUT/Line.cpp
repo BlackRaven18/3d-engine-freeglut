@@ -12,7 +12,7 @@ Line::Line(float* lineVert, float* lineColors, int howManyLines) {
 	this->howManyLines = howManyLines;
 }
 
-void Line::drawLine(){
+void Line::draw(){
 
 	if (lineVert == nullptr || lineColors == nullptr || howManyLines < 1)
 		return;

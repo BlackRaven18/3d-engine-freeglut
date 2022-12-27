@@ -69,6 +69,16 @@ float lineCols[12] = {
 	0, 0, 1
 };
 
+float pointVert[6] = {
+	1, 0, 0,
+	0, 1, 0
+};
+
+float pointColors[6]{
+	0, 1, 0,
+	0, 1, 0
+};
+
 void Engine::display(void) {
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
 	deltaTime = currentTime - prevTime;
@@ -82,7 +92,10 @@ void Engine::display(void) {
 	glTranslatef(0, 0, -8);
 
 	Line line(lineVert,lineCols, 2);
-	line.drawLine();
+	line.draw();
+
+	Point point(pointVert, pointColors, 2);
+	point.draw();
 
 	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, lineVert);
