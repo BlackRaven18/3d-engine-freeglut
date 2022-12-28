@@ -1,9 +1,10 @@
 #pragma once
 #include <GL/freeglut.h>
+#include "DrawableObject.h"
 
 enum LineType{NORMAL, CLOSED};
 
-class Line {
+class Line : public virtual DrawableObject {
 private:
 	float* lineVert;
 	float* lineColors;

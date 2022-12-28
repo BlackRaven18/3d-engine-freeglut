@@ -1,8 +1,10 @@
 #pragma once
 #include <GL/freeglut.h>
 #include <glm.hpp>
+#include "DrawableObject.h"
+#include "TransformableObject.h"
 
-class Cube {
+class Cube: public virtual DrawableObject, public virtual TransformableObject{
 private:
 	float* cubeVert;
 	float* cubeNorm;

@@ -1,7 +1,8 @@
 #pragma once
 #include <GL/freeglut.h>
+#include "DrawableObject.h"
 
-class Point {
+class Point : public virtual DrawableObject {
 private:
 	float* pointVert;
 	float* pointColors;

@@ -1,7 +1,8 @@
 #pragma once
 #include <GL/freeglut.h>
+#include "DrawableObject.h"
 
-class Segment {
+class Segment : public virtual DrawableObject {
 private:
 	float* segmentVert;
 	float* segmentColors;

@@ -1,7 +1,8 @@
 #pragma once
 #include <GL/freeglut.h>
+#include "DrawableObject.h"
 
-class TriangleFan {
+class TriangleFan: public virtual DrawableObject {
 private:
 	float* trianglesVert;
 	float* trianglesColors;

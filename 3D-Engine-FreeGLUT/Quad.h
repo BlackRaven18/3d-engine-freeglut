@@ -1,7 +1,8 @@
 #pragma once
 #include <GL/freeglut.h>
+#include "DrawableObject.h"
 
-class Quad {
+class Quad : public virtual DrawableObject {
 private:
 	float* quadVert;
 	float* quadColors;
