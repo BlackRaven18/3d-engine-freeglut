@@ -4,6 +4,9 @@
 #include <cmath>
 #include <iostream>
 #include "EasyFreeGLUTShapesDrawer.h"
+#include <glm.hpp>
+#include <gtx/transform.hpp>
+#include <gtc/type_ptr.hpp>
 
 #include "Point.h"
 #include "Segment.h"
@@ -13,28 +16,12 @@
 #include "TriangleFan.h"
 #include "Quad.h"
 #include "Cube.h"
+#include "Camera.h"
+
 
 
 #define M_PI 3.14159265358979323846264338327950288
 
-
-
-//void keyboard(unsigned char key, int x, int y);
-//void releaseKey(unsigned char key, int x, int y);
-//
-//void renderScene(void);
-
-//void mouseMove(int x, int y);
-//void mouseButton(int button, int state, int x, int y);
-//void pressKey(int key, int xx, int yy);
-//
-////float angle = 0.0f;
-////float lx = 0.0f, lz = -1.0f;
-////float x = 0.0f, z = 5.0f;
-////
-////float deltaAngle = 0.0f;
-////float deltaMove = 0;
-////int xOrigin = -1;
 
 class Engine {
 
@@ -49,12 +36,16 @@ private:
 	virtual ~Engine();
 
 	static float currentTime, prevTime, deltaTime;
+	static float deltaX, deltaY;
+
 
 
 
 public:
 
 	static Engine* getInstance();
+
+	static Camera camera;
 
 	void init(int argc, char** argv);
 	void start();
@@ -64,6 +55,7 @@ public:
 
 	static void changeSize(int w, int h);
 	static void keyboard(unsigned char key, int x, int y);
+	static void specialKeysHandler(int key, int x, int y);
 
 	float getDeltaTime();
 };

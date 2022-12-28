@@ -8,6 +8,11 @@ Engine* Engine::instance = nullptr;
 float Engine::currentTime = 0;
 float Engine::prevTime = 0;
 float Engine::deltaTime = 0;
+float Engine::deltaX = 0;
+float Engine::deltaY = 0;
+
+Camera Engine::camera;
+
 
 
 
@@ -39,7 +44,12 @@ void Engine::init(int argc, char** argv) {
 	glutDisplayFunc(display);
 	glutReshapeFunc(changeSize);
 	glutKeyboardFunc(keyboard);
+	glutSpecialFunc(specialKeysHandler);
 
+	Engine::camera.setPerspective(60.0f, (float)(WINDOW_WIDTH / WINDOW_HEIGHT), 100, 800);
+	Engine::camera.setPosition(0, 0, 0);
+	Engine::camera.setUpDownAngle(0);
+	Engine::camera.setLeftRightAngle(120);
 
 }
 
@@ -240,9 +250,37 @@ void Engine::display(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0f, 0.0f, 0.0f);
 
-	glMatrixMode(GL_MODELVIEW);
+	// Ustawienie rzutowania perspektywicznego.
+	//glm::perspective<float>(glm::radians(60.0f), (float)WINDOW_WIDTH / WINDOW_HEIGHT, 130, 470);
+	//Odsuniêcie œrodka sceny od kamery:
+	//glm::mat4 MatM = glm::translate(glm::vec3(0 + deltaX, 0, -30));
+	// K¹t patrzenia (góra/dó³):
+	//MatM = glm::rotate(MatM, glm::radians(0.0f), glm::vec3(1, 0, 0));
+	// Animacja (lewo/prawo):
+	//MatM = glm::rotate(MatM, glm::radians(120.0f), glm::vec3(0, 1, 0));
+
+	// Rotacja o~120 stopni wokó³ osi Y:
+	glm::mat4 MatRot120 = glm::rotate(glm::radians(120.0f), glm::vec3(0, 1, 0));
+	// Translacja +100 na osi X:
+	glm::mat4 MatTra100 = glm::translate(glm::vec3(100, 0, 0));
+	//Trzy obiekty kr¹¿¹ce wokó³ punktu centralnego:
+	glm::mat4 m1 = camera.getMainMatrix() *MatTra100;
+
+	glLoadMatrixf(glm::value_ptr(m1));
+	glColor3f(0, 1, 0); glutSolidCube(50); // Zielony szeœcian
+	glm::mat4 m2 = camera.getMainMatrix() * MatRot120 * MatTra100;
+	glLoadMatrixf(glm::value_ptr(m2));
+	glColor3f(1, 1, 0); glutSolidTeapot(40); // ¯ó³ty czajnik
+	glm::mat4 m3 = camera.getMainMatrix() * MatRot120 * MatRot120 * MatTra100;
+	glLoadMatrixf(glm::value_ptr(m3));
+	glColor3f(0, 0, 1); glutSolidSphere(50, 10, 10); // Niebieska sfera
+
+
+	/*glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0, 0, -8);
+	glTranslatef(0, 0, -8);*/
+
+
 
 	Segment segment(segVert,segCols, 2);
 	//segment.draw();
@@ -266,7 +304,7 @@ void Engine::display(void) {
 	//q.draw();
 
 	Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd);
-	cube.draw();
+	//cube.draw();
 
 	/*glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, lineVert);
@@ -324,7 +362,36 @@ void Engine::keyboard(unsigned char key, int x, int y) {
 	case 27: // kod klawisza Esc
 		exit(0);
 		break;
+	case 'w':
+		camera.moveForward(5);
+		break;
+	case 's':
+		camera.moveBackward(5);
+		break;
+	case 'a':
+		camera.moveLeft(5);
+		break;
+	case 'd':
+		camera.moveRight(5);
+		std::cout << deltaX << std::endl;
+		break;
 	default:
 		break;
 	}
+
+	glutPostRedisplay();
+}
+
+void Engine::specialKeysHandler(int key, int x, int y) {
+	switch (key) {
+	case GLUT_KEY_UP:
+		camera.moveUp(5);
+		break;
+	case GLUT_KEY_DOWN:
+		camera.moveDown(5);
+		break;
+	default:
+		break;
+	}
+	glutPostRedisplay();
 }
