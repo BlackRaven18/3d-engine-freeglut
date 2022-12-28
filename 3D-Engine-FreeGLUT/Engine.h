@@ -22,6 +22,7 @@
 
 #define M_PI 3.14159265358979323846264338327950288
 
+enum ShadowMapping {FLAT, SMOOTH};
 
 class Engine {
 
@@ -31,6 +32,7 @@ private:
 	static const int WINDOW_HEIGHT;
 	static const char * APP_TITLE;
 	static const bool LIGHTNING_ENABLED;
+	static const int SHADOW_ALGORYTHM;
 
 	static Engine* instance;
 	Engine();

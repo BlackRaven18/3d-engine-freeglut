@@ -4,6 +4,7 @@ const int Engine::WINDOW_WIDTH = 1280;
 const int Engine::WINDOW_HEIGHT = 720;
 const char* Engine::APP_TITLE = "3D Game Engine!";
 const bool Engine::LIGHTNING_ENABLED = true;
+const int Engine::SHADOW_ALGORYTHM = FLAT;
 
 Engine* Engine::instance = nullptr;
 float Engine::currentTime = 0;
@@ -58,7 +59,7 @@ void Engine::init(int argc, char** argv) {
 		GLfloat mat_shininess[] = { 50.0 };
 		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-		GLfloat light_position[] = { 100.0, 1.0, 1.0, 0.0 };
+		GLfloat light_position[] = { 100.0, 3.0, 1.0, 0.0 };
 		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
 		// W³¹czenie oœwietlenia
@@ -66,6 +67,17 @@ void Engine::init(int argc, char** argv) {
 		glEnable(GL_LIGHT0);
 		glEnable(GL_COLOR_MATERIAL);
 
+	}
+
+	switch (SHADOW_ALGORYTHM) {
+	case SMOOTH:
+		glShadeModel(GL_SMOOTH);
+		break;
+	case FLAT:
+		glShadeModel(GL_FLAT);
+		break;
+	default:
+		break;
 	}
 
 }
