@@ -30,6 +30,7 @@ private:
 	static const int WINDOW_WIDTH;
 	static const int WINDOW_HEIGHT;
 	static const char * APP_TITLE;
+	static const bool LIGHTNING_ENABLED;
 
 	static Engine* instance;
 	Engine();

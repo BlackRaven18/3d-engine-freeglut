@@ -3,6 +3,7 @@
 const int Engine::WINDOW_WIDTH = 1280;
 const int Engine::WINDOW_HEIGHT = 720;
 const char* Engine::APP_TITLE = "3D Game Engine!";
+const bool Engine::LIGHTNING_ENABLED = true;
 
 Engine* Engine::instance = nullptr;
 float Engine::currentTime = 0;
@@ -50,6 +51,22 @@ void Engine::init(int argc, char** argv) {
 	Engine::camera.setPosition(0, 0, -8);
 	Engine::camera.setUpDownAngle(0);
 	Engine::camera.setLeftRightAngle(120);
+
+	if (LIGHTNING_ENABLED) {
+		// Zdefiniowanie materia³u obiektu
+		GLfloat mat_specular[] = {0.8, 0.8, 0.8, 1.0 };
+		GLfloat mat_shininess[] = { 50.0 };
+		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+		GLfloat light_position[] = { 100.0, 1.0, 1.0, 0.0 };
+		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+		// W³¹czenie oœwietlenia
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		glEnable(GL_COLOR_MATERIAL);
+
+	}
 
 }
 
@@ -412,7 +429,6 @@ void Engine::keyboard(unsigned char key, int x, int y) {
 		break;
 	case 'a':
 		camera.moveLeft(5);
-		std::cout << "oo" << std::endl;
 		break;
 	case 'd':
 		camera.moveRight(5);
