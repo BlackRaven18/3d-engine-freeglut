@@ -5,7 +5,8 @@ Camera::Camera() {
 }
 
 void Camera::setPerspective(float fovy, float aspect, float zNear, float zFar) {
-	glm::perspective<float>(glm::radians(fovy), aspect, zNear, zFar);
+	//glm::perspective<float>(glm::radians(fovy), aspect, zNear, zFar);
+	gluPerspective(45.0f, aspect, 0.1f, 100.0f);
 }
 
 void Camera::setPosition(float x, float y, float z) {

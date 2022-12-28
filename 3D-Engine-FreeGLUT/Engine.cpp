@@ -46,8 +46,8 @@ void Engine::init(int argc, char** argv) {
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(specialKeysHandler);
 
-	Engine::camera.setPerspective(60.0f, (float)(WINDOW_WIDTH / WINDOW_HEIGHT), 100, 800);
-	Engine::camera.setPosition(0, 0, 0);
+	Engine::camera.setPerspective(45.0f, (float)(WINDOW_WIDTH / WINDOW_HEIGHT), 130, 470);
+	Engine::camera.setPosition(0, 0, -8);
 	Engine::camera.setUpDownAngle(0);
 	Engine::camera.setLeftRightAngle(120);
 
@@ -193,51 +193,83 @@ float cubeNorm[] = {
 //	1, 1, 0.3,
 //};
 //
-unsigned char cubeInd[] = {
-	0, 1, 2,
-	2, 1, 3,
-	4, 5, 6,
-	6, 5, 7,
-	8, 9, 10,
-	10, 9, 11,
-	12, 13, 14,
-	14, 13, 15,
-	16, 17, 18,
-	18, 17, 19,
-	20, 21, 22,
-	22, 21, 23
+//unsigned int cubeInd[] = {
+//	0, 1, 2,
+//	2, 1, 3,
+//	4, 5, 6,
+//	6, 5, 7,
+//	8, 9, 10,
+//	10, 9, 11,
+//	12, 13, 14,
+//	14, 13, 15,
+//	16, 17, 18,
+//	18, 17, 19,
+//	20, 21, 22,
+//	22, 21, 23
+//};
+
+//float cubeVert[] = {
+//	-1.0, -1.0,  1.0,
+//	 1.0, -1.0,  1.0,
+//	-1.0,  1.0,  1.0,
+//	 1.0,  1.0,  1.0,
+//	-1.0, -1.0, -1.0,
+//	 -1.0, 1.0, -1.0,
+//	 1.0,  1.0, 1.0,
+//	-1.0,  1.0, -1.0
+//};
+//
+//unsigned int cubeInd[] = {
+//	0, 1, 2, 3, // Przód
+//	4, 5, 6, 7, // Ty³
+//	0, 4, 7, 3, // Lewa strona
+//	1, 5, 6, 2, // Prawa strona
+//	2, 6, 7, 3, // Górna strona
+//	0, 1, 5, 4  // Doln¹ strona
+//};
+//
+float cubeColors[] = {
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
+	1, 0, 0,
 };
 
 float cubeVert[] = {
-	-1.0, -1.0,  1.0,
-	 1.0, -1.0,  1.0,
-	 1.0,  1.0,  1.0,
-	-1.0,  1.0,  1.0,
-	-1.0, -1.0, -1.0,
-	 1.0, -1.0, -1.0,
-	 1.0,  1.0, -1.0,
-	-1.0,  1.0, -1.0
+
+	0, 0, 0,
+	2, 0, 0,
+	2, 2, 0,
+	0, 2, 0,
+
+	0, 0, 2,
+	2, 0, 2,
+	2, 2, 2,
+	0, 2, 2
+
 };
 
-//unsigned char cubeInd[] = {
-//	0, 1, 2, 3,
-//	4, 5, 6, 7,
-//	0, 3, 7, 4,
-//	1, 5, 6, 2,
-//	0, 4, 5, 1,
-//	3, 2, 6, 7
-//};
 
-float cubeColors[] = {
-	1, 0.3, 0.3,
-	1, 0.3, 0.3,
-	1, 0.3, 0.3,
-	1, 1, 0.3,
-	1, 1, 0.3,
-	1, 1, 0.3,
-	1, 1, 1,
-	1, 1, 1,
+
+unsigned int cubeInd[] = {
+		// przednia œciana
+		0, 1, 2, 3,
+		// lewa œciana
+		0, 3, 7, 4,
+		// prawa œciana
+		1, 2, 6, 5,
+		// tylna œciana
+		4, 5, 6, 7,
+		// górna œciana
+		0, 1, 5, 4,
+		// dolna œciana
+		7, 6, 3, 2
 };
+
 
 
 
@@ -260,25 +292,31 @@ void Engine::display(void) {
 	//MatM = glm::rotate(MatM, glm::radians(120.0f), glm::vec3(0, 1, 0));
 
 	// Rotacja o~120 stopni wokó³ osi Y:
-	glm::mat4 MatRot120 = glm::rotate(glm::radians(120.0f), glm::vec3(0, 1, 0));
-	// Translacja +100 na osi X:
-	glm::mat4 MatTra100 = glm::translate(glm::vec3(100, 0, 0));
-	//Trzy obiekty kr¹¿¹ce wokó³ punktu centralnego:
-	glm::mat4 m1 = camera.getMainMatrix() *MatTra100;
+	//glm::mat4 MatRot120 = glm::rotate(glm::radians(120.0f), glm::vec3(0, 1, 0));
+	//// Translacja +100 na osi X:
+	//glm::mat4 MatTra100 = glm::translate(glm::vec3(100, 0, 0));
 
+	Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd);
+	glm::mat4 m1 = camera.getMainMatrix();
 	glLoadMatrixf(glm::value_ptr(m1));
-	glColor3f(0, 1, 0); glutSolidCube(50); // Zielony szeœcian
-	glm::mat4 m2 = camera.getMainMatrix() * MatRot120 * MatTra100;
-	glLoadMatrixf(glm::value_ptr(m2));
-	glColor3f(1, 1, 0); glutSolidTeapot(40); // ¯ó³ty czajnik
-	glm::mat4 m3 = camera.getMainMatrix() * MatRot120 * MatRot120 * MatTra100;
-	glLoadMatrixf(glm::value_ptr(m3));
-	glColor3f(0, 0, 1); glutSolidSphere(50, 10, 10); // Niebieska sfera
+	glTranslatef(1, -1, -2); 
+	cube.draw();
+	 
+	//Trzy obiekty kr¹¿¹ce wokó³ punktu centralnego:
+	//glm::mat4 m1 = camera.getMainMatrix() *MatTra100;
+	//glLoadMatrixf(glm::value_ptr(m1));
+	//glColor3f(0, 1, 0); glTranslatef(-100, 0,2); cube.draw();//glutSolidCube(50); // Zielony szeœcian
+	//glm::mat4 m2 = camera.getMainMatrix() * MatRot120 * MatTra100;
+	//glLoadMatrixf(glm::value_ptr(m2));
+	//glColor3f(1, 1, 0); glutSolidTeapot(40); // ¯ó³ty czajnik
+	//glm::mat4 m3 = camera.getMainMatrix() * MatRot120 * MatRot120 * MatTra100;
+	//glLoadMatrixf(glm::value_ptr(m3));
+	//glColor3f(0, 0, 1); glutSolidSphere(50, 10, 10); // Niebieska sfera
 
 
-	/*glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(0, 0, -8);*/
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
+	//glTranslatef(0, 0, -8);
 
 
 
@@ -303,7 +341,7 @@ void Engine::display(void) {
 	Quad q(quadVerts, QuadColors, 1);
 	//q.draw();
 
-	Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd);
+	//Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd);
 	//cube.draw();
 
 	/*glEnableClientState(GL_VERTEX_ARRAY);
@@ -351,7 +389,8 @@ void Engine::changeSize(int w, int h) {
 
 	glViewport(0, 0, w, h);
 
-	gluPerspective(45.0f, ratio, 0.1f, 100.0f);
+	//gluPerspective(45.0f, ratio, 0.1f, 100.0f);
+	Engine::camera.setPerspective(60.0f, ratio, 0.1f, 100);
 
 	glMatrixMode(GL_MODELVIEW);
 }
@@ -370,10 +409,10 @@ void Engine::keyboard(unsigned char key, int x, int y) {
 		break;
 	case 'a':
 		camera.moveLeft(5);
+		std::cout << "oo" << std::endl;
 		break;
 	case 'd':
 		camera.moveRight(5);
-		std::cout << deltaX << std::endl;
 		break;
 	default:
 		break;

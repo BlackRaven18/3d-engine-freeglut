@@ -6,11 +6,11 @@ private:
 	float* cubeVert;
 	float* cubeNorm;
 	float* cubeColors;
-	unsigned char* cubeInd;
+	unsigned int* cubeInd;
 
 public:
 	Cube();
-	Cube(float* cubeVert, float* cubeNorm, float* cubeColors, unsigned char* cubeInd);
+	Cube(float* cubeVert, float* cubeNorm, float* cubeColors, unsigned int* cubeInd);
 
 	void draw();
 
@@ -23,7 +23,7 @@ public:
 	float* getCubeColors();
 	void setCubeColors(float* cubeColors);
 
-	unsigned char* getCubeInd();
-	void setCubeInd(unsigned char* cubeInd);
+	unsigned int* getCubeInd();
+	void setCubeInd(unsigned int* cubeInd);
 
 };

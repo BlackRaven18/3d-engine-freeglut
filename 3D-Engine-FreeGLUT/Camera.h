@@ -1,5 +1,6 @@
 #pragma once
 #include <glm.hpp>
+#include <GL/freeglut.h>
 #include <gtx/transform.hpp>
 #include <gtc/type_ptr.hpp>
 

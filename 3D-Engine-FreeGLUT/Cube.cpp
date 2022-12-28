@@ -8,7 +8,7 @@ Cube::Cube() {
 	
 }
 
-Cube::Cube(float* cubeVert, float* cubeNorm, float* cubeColors, unsigned char* cubeInd) {
+Cube::Cube(float* cubeVert, float* cubeNorm, float* cubeColors, unsigned int* cubeInd) {
 	this->cubeVert = cubeVert;
 	this->cubeNorm = cubeNorm;
 	this->cubeColors = cubeColors;
@@ -23,16 +23,16 @@ void Cube::draw() {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, cubeVert);
 
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer(GL_FLOAT, 0, cubeNorm);
+	//glEnableClientState(GL_NORMAL_ARRAY);
+	//glNormalPointer(GL_FLOAT, 0, cubeNorm);
 
 	glEnableClientState(GL_COLOR_ARRAY);
 	glColorPointer(3, GL_FLOAT, 0, cubeColors);
 
-	glDrawElements(GL_TRIANGLES, sizeof(cubeInd), GL_UNSIGNED_BYTE, cubeInd);
+	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_INT, cubeInd);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
+	//glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
@@ -59,10 +59,10 @@ void Cube::setCubeColors(float* cubeColors) {
 	this->cubeColors = cubeColors;
 }
 
-unsigned char* Cube::getCubeInd() {
+unsigned int* Cube::getCubeInd() {
 	return cubeInd;
 }
-void Cube::setCubeInd(unsigned char* cubeInd) {
+void Cube::setCubeInd(unsigned int* cubeInd) {
 	this->cubeInd = cubeInd;
 }
 
