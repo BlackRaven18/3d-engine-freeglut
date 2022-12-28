@@ -36,6 +36,18 @@ void Cube::draw() {
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
+void Cube::translate(float x, float y, float z) {
+	glTranslatef(x, y, z);
+}
+
+void Cube::rotate(float angle, float x, float y, float z) {
+	glRotatef(glm::radians(angle), x, y, z);
+}
+void Cube::scale(float x, float y, float z) {
+	glScalef(x, y, z);
+}
+
+
 float* Cube::getCubeVert() {
 	return cubeVert;
 }

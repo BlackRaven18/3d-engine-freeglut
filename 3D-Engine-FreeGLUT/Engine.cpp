@@ -299,7 +299,10 @@ void Engine::display(void) {
 	Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd);
 	glm::mat4 m1 = camera.getMainMatrix();
 	glLoadMatrixf(glm::value_ptr(m1));
-	glTranslatef(1, -1, -2); 
+	//glTranslatef(1, -1, -2); 
+	cube.translate(1, -1, -2);
+	cube.rotate(130, 1, 1, 0);
+	cube.scale(2, 2, 1);
 	cube.draw();
 	 
 	//Trzy obiekty kr¹¿¹ce wokó³ punktu centralnego:
