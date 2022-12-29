@@ -19,7 +19,6 @@
 #include "BitmapHandler.h"
 
 //Class for presentation puropses only
-
 enum presentationMode { POINTSS, SEGMENT, NORMAL_LINE, TRIANGLE, QUAD, TRIANGLE_FAN, TRIANGLE_STRIP, CUBE,  TEX_TRIANGLE, TEX_QUAD, EASY_SHAPE_1, EASY_SHAPE_2};
 
 class PresentationClass {
@@ -256,7 +255,6 @@ public:
 	void run() {
 		switch (modeIndicator) {
 		case POINTSS:
-			//std::cout << "Presentation mode: Point" << std::endl;
 			point->draw();
 			break;
 		case SEGMENT:

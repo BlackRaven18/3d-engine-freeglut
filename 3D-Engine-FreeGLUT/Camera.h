@@ -35,15 +35,9 @@ public:
 		mainMatrix = glm::rotate(mainMatrix, glm::radians(angle), glm::vec3(0, 1, 0));
 	}
 	void moveForward(float value) {
-		//position.z += value;
-		//mainMatrix = glm::translate(position);
-		//mainMatrix *= glm::vec3(0, 0, value);
 		mainMatrix = glm::translate(mainMatrix, glm::vec3(0, 0, value));
 	}
 	void moveBackward(float value) {
-		//position.z -= value;
-		//mainMatrix = glm::translate(position);
-		//mainMatrix *= glm::vec3(0, 0, -value);
 		mainMatrix = glm::translate(mainMatrix, glm::vec3(0, 0, -value));
 	}
 

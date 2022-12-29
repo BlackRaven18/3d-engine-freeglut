@@ -153,7 +153,6 @@ void Engine::changeSize(int w, int h) {
 	glLoadIdentity();
 
 	glViewport(0, 0, w, h);
-	//gluPerspective(45, w / h, 0.1, 100);
 	Engine::camera.setPerspective(60.0f, ratio, 0.1f, 100);
 
 	glMatrixMode(GL_MODELVIEW);
