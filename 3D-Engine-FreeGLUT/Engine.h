@@ -1,5 +1,8 @@
 #pragma once
 
+#define M_PI 3.14159265358979323846264338327950288
+
+
 #include <GL/freeglut.h>
 #include <cmath>
 #include <iostream>
@@ -17,10 +20,11 @@
 #include "Quad.h"
 #include "Cube.h"
 #include "Camera.h"
+#include "BitmapHandler.h"
 
 
 
-#define M_PI 3.14159265358979323846264338327950288
+
 
 enum ShadowMapping {FLAT, SMOOTH};
 
@@ -40,6 +44,8 @@ private:
 
 	static float currentTime, prevTime, deltaTime;
 	static float deltaX, deltaY;
+
+	static GLuint textureID;
 
 
 

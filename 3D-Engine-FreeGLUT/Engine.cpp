@@ -1,4 +1,7 @@
 #include "Engine.h"
+//#define STB_IMAGE_IMPLEMENTATION  
+//#include <stb_image.h>
+
 
 const int Engine::WINDOW_WIDTH = 1280;
 const int Engine::WINDOW_HEIGHT = 720;
@@ -14,6 +17,8 @@ float Engine::deltaX = 0;
 float Engine::deltaY = 0;
 
 Camera Engine::camera;
+
+GLuint Engine::textureID = 0;
 
 
 
@@ -79,6 +84,15 @@ void Engine::init(int argc, char** argv) {
 	default:
 		break;
 	}
+	
+	BitmapHandler bh;
+	if (!bh.loadTexture("sample_texture.jpg")) {
+		exit(0);
+	}
+
+
+	// W³¹czenie teksturowania
+	glEnable(GL_TEXTURE_2D);
 
 }
 
@@ -257,15 +271,26 @@ float cubeNorm[] = {
 //	0, 1, 5, 4  // Doln¹ strona
 //};
 //
+//float cubeColors[] = {
+//	1, 0, 0,
+//	1, 0, 0,
+//	1, 0, 0,
+//	1, 0, 0,
+//	1, 0, 0,
+//	1, 0, 0,
+//	1, 0, 0,
+//	1, 0, 0,
+//};
+
 float cubeColors[] = {
-	1, 0, 0,
-	1, 0, 0,
-	1, 0, 0,
-	1, 0, 0,
-	1, 0, 0,
-	1, 0, 0,
-	1, 0, 0,
-	1, 0, 0,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
 };
 
 float cubeVert[] = {
@@ -300,6 +325,18 @@ unsigned int cubeInd[] = {
 };
 
 
+float cube_texc[] = {
+	0, 0,
+	1, 0,
+	1, 1,
+	0, 1,
+	0, 0,
+	1, 0,
+	1, 1,
+	0, 1
+};
+
+
 
 
 
@@ -325,14 +362,20 @@ void Engine::display(void) {
 	//// Translacja +100 na osi X:
 	//glm::mat4 MatTra100 = glm::translate(glm::vec3(100, 0, 0));
 
+
+	//*******************************************************************************
 	Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd);
 	glm::mat4 m1 = camera.getMainMatrix();
 	glLoadMatrixf(glm::value_ptr(m1));
 	//glTranslatef(1, -1, -2); 
 	cube.translate(1, -1, -2);
-	cube.rotate(130, 1, 1, 0);
-	cube.scale(2, 2, 1);
+	//cube.rotate(130, 1, 1, 0);
+	//cube.scale(2, 2, 1);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, 0, cube_texc);
 	cube.draw();
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	//*******************************************************************************
 	 
 	//Trzy obiekty kr¹¿¹ce wokó³ punktu centralnego:
 	//glm::mat4 m1 = camera.getMainMatrix() *MatTra100;
