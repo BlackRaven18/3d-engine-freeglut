@@ -45,10 +45,6 @@ private:
 	static float currentTime, prevTime, deltaTime;
 	static float deltaX, deltaY;
 
-	static GLuint textureID;
-
-
-
 
 public:
 

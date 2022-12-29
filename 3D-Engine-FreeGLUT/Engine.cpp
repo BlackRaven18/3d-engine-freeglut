@@ -18,11 +18,6 @@ float Engine::deltaY = 0;
 
 Camera Engine::camera;
 
-GLuint Engine::textureID = 0;
-
-
-
-
 
 Engine::Engine() {
 }
@@ -64,7 +59,7 @@ void Engine::init(int argc, char** argv) {
 		GLfloat mat_shininess[] = { 50.0 };
 		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-		GLfloat light_position[] = { 100.0, 3.0, 1.0, 0.0 };
+		GLfloat light_position[] = { 105.0, 0.0, -2.0, 0.0 };
 		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
 		// W³¹czenie oœwietlenia
@@ -86,7 +81,7 @@ void Engine::init(int argc, char** argv) {
 	}
 	
 	BitmapHandler bh;
-	if (!bh.loadTexture("sample_texture.jpg")) {
+	if (bh.loadTexture("sample_texture.jpg") == -1) {
 		exit(0);
 	}
 
@@ -155,12 +150,18 @@ float triangleVert[18] = {
 };
 
 float triangleColors[18] = {
-	1, 0, 0,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1
+	/*1, 0, 0,
 	1, 0, 0,
 	1, 0, 0,
 	0, 1, 0,
 	0, 1, 0,
-	0, 1, 0
+	0, 1, 0*/
 };
 
 float triangleStripVert[15] = {
@@ -325,15 +326,32 @@ unsigned int cubeInd[] = {
 };
 
 
-float cube_texc[] = {
+float cubeTextCord[] = {
 	0, 0,
 	1, 0,
-	1, 1,
 	0, 1,
+	1, 1,
 	0, 0,
 	1, 0,
+	0, 1,
 	1, 1,
-	0, 1
+
+};
+
+float triangleTextCord[] = {
+	0, 0,
+	0, 1,
+	1, 0,
+	0, 0,
+	0, 1,
+	1, 0
+};
+
+float quadTextCord[] = {
+	0, 0,
+	0, 1,
+	1, 1,
+	1, 0
 };
 
 
@@ -346,7 +364,7 @@ void Engine::display(void) {
 	prevTime = currentTime;
 
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0f, 0.0f, 0.0f);
+	//glColor3f(1.0f, 0.0f, 0.0f);
 
 	// Ustawienie rzutowania perspektywicznego.
 	//glm::perspective<float>(glm::radians(60.0f), (float)WINDOW_WIDTH / WINDOW_HEIGHT, 130, 470);
@@ -364,17 +382,17 @@ void Engine::display(void) {
 
 
 	//*******************************************************************************
-	Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd);
-	glm::mat4 m1 = camera.getMainMatrix();
-	glLoadMatrixf(glm::value_ptr(m1));
-	//glTranslatef(1, -1, -2); 
-	cube.translate(1, -1, -2);
-	//cube.rotate(130, 1, 1, 0);
-	//cube.scale(2, 2, 1);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, GL_FLOAT, 0, cube_texc);
-	cube.draw();
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+
+
+	//Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd, cubeTextCord, 0);
+	//glm::mat4 m1 = camera.getMainMatrix();
+	//glLoadMatrixf(glm::value_ptr(m1));
+	////glTranslatef(1, -1, -2); 
+	//cube.translate(1, -1, -2);
+	////cube.rotate(130, 1, 1, 0);
+	////cube.scale(2, 2, 1);
+	//cube.drawTextured();
 	//*******************************************************************************
 	 
 	//Trzy obiekty kr¹¿¹ce wokó³ punktu centralnego:
@@ -404,8 +422,13 @@ void Engine::display(void) {
 	Line line(CLOSED, lineVert, lineCols, 3);
 	//line.draw();
 
-	Triangle triangle(triangleVert, triangleColors, 2);
+	//Triangle triangle(triangleVert, triangleColors, 2);
+	Triangle triangle(triangleVert, triangleColors, triangleTextCord, 2);;
+	glm::mat4 m1 = camera.getMainMatrix();
+	glLoadMatrixf(glm::value_ptr(m1));
+
 	//triangle.draw();
+	//triangle.drawTextured();
 
 	TriangleStrip ts(triangleStripVert, triangleStripColors, 5);
 	//ts.draw();
@@ -413,7 +436,8 @@ void Engine::display(void) {
 	TriangleFan tf(triangleFanVerts, triangleFanColors, 4);
 	//tf.draw();
 
-	Quad q(quadVerts, QuadColors, 1);
+	Quad q(quadVerts, QuadColors, quadTextCord, 1);
+	q.drawTextured();
 	//q.draw();
 
 	//Cube cube(cubeVert, cubeNorm, cubeColors, cubeInd);

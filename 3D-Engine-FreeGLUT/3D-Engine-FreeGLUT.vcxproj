@@ -156,6 +156,7 @@
     <ClInclude Include="Quad.h" />
     <ClInclude Include="Segment.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="TexturableObject.h" />
     <ClInclude Include="TransformableObject.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="TriangleFan.h" />

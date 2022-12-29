@@ -5,7 +5,7 @@ Cube::Cube() {
 	cubeNorm = nullptr;
 	cubeColors = nullptr;
 	cubeInd = nullptr;
-	
+	cubeTextCord = nullptr;
 }
 
 Cube::Cube(float* cubeVert, float* cubeNorm, float* cubeColors, unsigned int* cubeInd) {
@@ -13,6 +13,14 @@ Cube::Cube(float* cubeVert, float* cubeNorm, float* cubeColors, unsigned int* cu
 	this->cubeNorm = cubeNorm;
 	this->cubeColors = cubeColors;
 	this->cubeInd = cubeInd;
+	this->cubeTextCord = nullptr;
+}
+Cube::Cube(float* cubeVert, float* cubeNorm, float* cubeColors, unsigned int* cubeInd, float* cubeTextCord) {
+	this->cubeVert = cubeVert;
+	this->cubeNorm = cubeNorm;
+	this->cubeColors = cubeColors;
+	this->cubeInd = cubeInd;
+	this->cubeTextCord = cubeTextCord;
 }
 
 void Cube::draw() {
@@ -23,8 +31,8 @@ void Cube::draw() {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, cubeVert);
 
-	//glEnableClientState(GL_NORMAL_ARRAY);
-	//glNormalPointer(GL_FLOAT, 0, cubeNorm);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer(GL_FLOAT, 0, cubeNorm);
 
 	glEnableClientState(GL_COLOR_ARRAY);
 	glColorPointer(3, GL_FLOAT, 0, cubeColors);
@@ -32,7 +40,31 @@ void Cube::draw() {
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_INT, cubeInd);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
-	//glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+}
+
+void Cube::drawTextured() {
+	if (cubeVert == nullptr || cubeNorm == nullptr || cubeColors == nullptr || cubeInd == nullptr || cubeTextCord == nullptr)
+		return;
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, cubeVert);
+
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, 0, cubeTextCord);
+
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer(GL_FLOAT, 0, cubeNorm);
+
+	glEnableClientState(GL_COLOR_ARRAY);
+	glColorPointer(3, GL_FLOAT, 0, cubeColors);
+
+	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_INT, cubeInd);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 

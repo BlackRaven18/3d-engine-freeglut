@@ -4,5 +4,5 @@
 class BitmapHandler {
 public:
 
-	bool loadTexture(const char* path);
+	GLuint loadTexture(const char* path);
 };

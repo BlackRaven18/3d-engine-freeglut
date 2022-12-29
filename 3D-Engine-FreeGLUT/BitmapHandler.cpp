@@ -2,9 +2,9 @@
 #define STB_IMAGE_IMPLEMENTATION  
 #include <stb_image.h>
 
-bool BitmapHandler::loadTexture(const char* path) {
+GLuint BitmapHandler::loadTexture(const char* path) {
 
-	GLuint textureID;
+	GLuint textureID = -1;
 	int width, height, channels;
 
 	//textury
@@ -12,7 +12,7 @@ bool BitmapHandler::loadTexture(const char* path) {
 	if (image == nullptr)
 	{
 		printf("Nie uda³o siê wczytaæ tekstury\n");
-		return false;
+		return textureID;
 	}
 
 	// Utworzenie bufora tekstury
@@ -31,6 +31,6 @@ bool BitmapHandler::loadTexture(const char* path) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	return true;
+	return textureID;
 }
 
