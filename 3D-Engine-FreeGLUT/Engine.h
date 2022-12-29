@@ -22,6 +22,8 @@
 #include "Camera.h"
 #include "BitmapHandler.h"
 
+#include "PresentationClass.h"
+
 
 
 
@@ -35,7 +37,7 @@ private:
 	static const int WINDOW_WIDTH;
 	static const int WINDOW_HEIGHT;
 	static const char * APP_TITLE;
-	static const bool LIGHTNING_ENABLED;
+	static bool LIGHTNING_ENABLED;
 	static const int SHADOW_ALGORYTHM;
 
 	static Engine* instance;
@@ -51,9 +53,12 @@ public:
 	static Engine* getInstance();
 
 	static Camera camera;
+	static PresentationClass presentationClass;
 
 	void init(int argc, char** argv);
 	void start();
+
+	static void turnOnOffTheLight();
 
 	static void update();
 	static void display();
@@ -61,6 +66,7 @@ public:
 	static void changeSize(int w, int h);
 	static void keyboard(unsigned char key, int x, int y);
 	static void specialKeysHandler(int key, int x, int y);
+	static void mouse(int button, int state, int x, int y);
 
 	float getDeltaTime();
 };

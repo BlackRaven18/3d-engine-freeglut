@@ -153,6 +153,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="PresentationClass.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="Segment.h" />
     <ClInclude Include="Point.h" />
